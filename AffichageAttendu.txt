@@ -1,0 +1,58 @@
+﻿PreOrdre Arbre de recherche binaire :( {(20), (31), (46), (56), (61), (69), (72), }
+
+|__56 (black)
+
+|__56 (black)
+   |__null (black)
+   |__72 (red)
+
+|__56 (black)
+   |__31 (red)
+   |__72 (red)
+
+|__56 (black)
+   |__31 (black)
+   |__72 (black)
+      |__61 (red)
+      |__null (black)
+
+
+------------------------------
+
+
+
+
+|__56 (black)
+   |__31 (black)
+   |__69 (black)
+      |__61 (red)
+      |__72 (red)
+
+|__56 (black)
+   |__31 (black)
+   |   |__20 (red)
+   |   |__null (black)
+   |__69 (black)
+      |__61 (red)
+      |__72 (red)
+
+|__56 (black)
+   |__31 (black)
+   |   |__20 (red)
+   |   |__46 (red)
+   |__69 (black)
+      |__61 (red)
+      |__72 (red)
+
+Recherche valeur 69 : Noeud trouvé.
+Recherche valeur 99 : Noeud introuvable.
+
+PreOrdre ( {56 (black)}, {31 (black)}, {20 (red)}, {46 (red)}, {69 (black)}, {61 (red)}, {72 (red)} )
+PostOrdre ( {20 (red)}, {46 (red)}, {31 (black)}, {61 (red)}, {72 (red)}, {69 (black)}, {56 (black)} )
+AscendingOrdre ( {20 (red)}, {31 (black)}, {46 (red)}, {56 (black)}, {61 (red)}, {69 (black)}, {72 (red)},  )
+DescendingOrdre ( {72 (red)}, {69 (black)}, {61 (red)}, {56 (black)}, {46 (red)}, {31 (black)}, {20 (red)},  )
+LevelOrdre ( {56 (black)}, {31 (black)}, {69 (black)}, {20 (red)}, {46 (red)}, {61 (red)}, {72 (red)} )
+
+Hauteur de l'arbre bianire est : 4
+Hauteur de l'arbre rouge-noir est : 3
+
