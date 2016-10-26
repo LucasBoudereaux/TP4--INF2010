@@ -120,16 +120,18 @@ public class RedBlackTree<T extends Comparable<? super T> >
 	private void insertionCases( RBNode<T> X )
 	{
 		// A MODIFIER/COMPLÉTER
+		System.out.println("On veut inserer le noeud : " + X.value);
 		System.out.println("go ins1");
 		insertionCase1( X );
 	}
 
 	private void insertionCase1 ( RBNode<T> X )
 	{
+		System.out.println("***********       INS1      ***************");
 		//Si c'est la racine, le noeud devient noir
 		if(X.parent == null){ // Si le noeud n'a pas de parent, alors c'est forcement la racine
 			X.setToBlack();
-			
+			System.out.println("La couleur de la racine (" + X.value + ") est : " + X.color);
 		}
 		System.out.println("go ins2");
 		insertionCase2( X );
@@ -137,25 +139,44 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase2( RBNode<T> X )
 	{
-		if(X.parent != null && X.parent.isBlack()) //Si le parent du noeud est noir, alors on le noeud est bien placé donc on SORT !
+		System.out.println("***********       INS2      ***************");
+		if(X.parent != null && X.parent.isBlack()) //Si le parent du noeud est noir, alors le noeud est bien placé donc on SORT !
 			return;
-		else
+		else{
+			if(X.parent != null)
+				System.out.println("La couleur du parent (" + X.parent.value + ") du noeud (" + X.value + ") est : " + X.parent.color);
+			else
+				System.out.println("Le parent du noeud (" + X.value + ") est : " + X.parent);
+			
 			System.out.println("go ins3");
 			insertionCase3( X ); //Sinon, on teste le cas 3
+		}
 	}
 
 	private void insertionCase3( RBNode<T> X )
 	{
-		System.out.println("Parent : " + X.parent);
+		System.out.println("***********       INS3      ***************");
+		
 		if(X.parent != null && X.uncle() != null && X.parent.isRed() && X.uncle().isRed()){
 				X.uncle().setToBlack();
 				X.parent.setToBlack();
 				X.grandParent().setToRed();
-				System.out.println(X.grandParent().value);
+				System.out.println("Le grand parent du noeud " + X.value + " est : " + X.grandParent().value);
+				System.out.println("On rapelle insertionCases avec le grand parent (" + X.grandParent().value + " du noeud (" + X.value + ") pour vérifier que les conditions d'un arbre rouge noir sont respectées");
 				System.out.println("go ins0");
 				insertionCases(X.grandParent()); //Le grand parent doit à son tour vérifier toutes les règles
 		}
 		else{
+			if(X.parent == null)
+				System.out.println("Le parent du noeud (" + X.value + ") est : null");
+			else
+				System.out.println("La couleur du parent (" + X.parent.value + ") du noeud (" + X.value + ") est : " + X.parent.color);
+			
+			if(X.uncle() == null){}
+			else
+				System.out.println("La couleur de l'oncle (" + X.uncle().value + ") du noeud (" + X.value + ") est : " + X.uncle().color);
+
+			
 			System.out.println("go ins4");
 			insertionCase4( X );
 		}
@@ -163,22 +184,29 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase4( RBNode<T> X )
 	{
+		System.out.println("***********       INS4      ***************");
 		System.out.println("Parent : " + X.parent + ", Oncle : " + X.uncle());
 		if(X.parent != null && X.uncle() != null && X.parent.isRed() && X.uncle().isBlack()){
-			if((X.parent.leftChild.value.compareTo(X.value) == 0) && (X.grandParent().rightChild.value.compareTo(X.parent.value)) == 0){
-				rotateRight(X.parent);
-				System.out.println("go ins5");
-				insertionCase5( X.rightChild );
+			if(X.parent.leftChild != null && X.grandParent().rightChild != null){
+				if((X.parent.leftChild.value.compareTo(X.value) == 0) && (X.grandParent().rightChild.value.compareTo(X.parent.value)) == 0){
+					System.out.println("On tourne à droite");
+					rotateRight(X.parent);
+					System.out.println("go ins5");
+					insertionCase5( X.rightChild );
+				}
 			}
-			else if((X.parent.rightChild.value.compareTo(X.value) == 0) && (X.grandParent().leftChild.value.compareTo(X.parent.value)) == 0){
-				rotateLeft(X.parent);
-				System.out.println("go ins5");
-				insertionCase5( X.leftChild );
+			else if(X.parent.rightChild != null && X.grandParent().leftChild != null){
+				if((X.parent.rightChild.value.compareTo(X.value) == 0) && (X.grandParent().leftChild.value.compareTo(X.parent.value)) == 0){
+					rotateLeft(X.parent);
+					System.out.println("go ins5");
+					insertionCase5( X.leftChild );
+				}
 			}
 			else{
 				return;
 			}
 		}
+		
 		return;
 	}
 
@@ -397,11 +425,11 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		{
 			
 			if(grandParent() != null ){
-				System.out.println("Grand parent : " + grandParent());
-				System.out.println("GrandParent.leftChild : " + grandParent().leftChild);
-				System.out.println("GrandParent.rightChild : " +grandParent().rightChild);
-				System.out.println("Resultat comparaison entre grandParent.leftChild et parent.value : " + grandParent().leftChild.value.compareTo(parent.value));
-				System.out.println("Resultat comparaison entre grandParent.rightChild et parent.value : " + grandParent().rightChild.value.compareTo(parent.value));
+//				System.out.println("Grand parent : " + grandParent());
+//				System.out.println("GrandParent.leftChild : " + grandParent().leftChild);
+//				System.out.println("GrandParent.rightChild : " +grandParent().rightChild);
+//				System.out.println("Resultat comparaison entre grandParent.leftChild et parent.value : " + grandParent().leftChild.value.compareTo(parent.value));
+//				System.out.println("Resultat comparaison entre grandParent.rightChild et parent.value : " + grandParent().rightChild.value.compareTo(parent.value));
 				if(grandParent().leftChild != null && (grandParent().leftChild.value.compareTo(parent.value) != 0)){
 					return grandParent().leftChild;
 				}
@@ -411,12 +439,12 @@ public class RedBlackTree<T extends Comparable<? super T> >
 				}
 				
 				else{
-					System.out.println("Grand parent null 1");
+					System.out.println("Le noeud " + this.value + " a un grand parent, mais celui-ci n'a qu'un enfant, donc " + this.value + " n'a pas d'oncle");
 					return null;
 				}
 			}
 			else{
-				System.out.println("Grand parent null 2");
+				System.out.println("Le noeud " + this.value + " n'a pas de grand parent donc PAS d'oncle");
 				return null;
 			}
 		}
