@@ -184,34 +184,44 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void insertionCase4( RBNode<T> X )
 	{
+		boolean rotation = false;
+		
 		System.out.println("***********       INS4      ***************");
 		System.out.println("Parent : " + X.parent + ", Oncle : " + X.uncle());
-		if(X.parent != null && X.uncle() != null && X.parent.isRed() && X.uncle().isBlack()){
-			if(X.parent.leftChild != null && X.grandParent().rightChild != null){
-				if((X.parent.leftChild.value.compareTo(X.value) == 0) && (X.grandParent().rightChild.value.compareTo(X.parent.value)) == 0){
-					System.out.println("On tourne à droite");
-					rotateRight(X.parent);
-					System.out.println("go ins5");
-					insertionCase5( X.rightChild );
+		System.out.println("X.grandParent() : " + X.grandParent());
+		//System.out.println("X.parent.leftChild.value : " + X.parent.leftChild.value);
+		if(X.parent != null && X.parent.isRed()){
+			if(X.uncle() != null && X.uncle().isBlack()){
+				if(X.parent.leftChild != null && X.grandParent().rightChild != null){
+					System.out.println("ntmé");
+					System.out.println(X.parent.leftChild);
+					if((X.parent.leftChild.value.compareTo(X.value) == 0) && (X.grandParent().rightChild.value.compareTo(X.parent.value)) == 0){
+						System.out.println("On tourne à droite");
+						rotateRight(X.parent);
+						System.out.println("go ins5");
+						insertionCase5( X.rightChild );
+					}
 				}
-			}
-			else if(X.parent.rightChild != null && X.grandParent().leftChild != null){
-				if((X.parent.rightChild.value.compareTo(X.value) == 0) && (X.grandParent().leftChild.value.compareTo(X.parent.value)) == 0){
-					rotateLeft(X.parent);
-					System.out.println("go ins5");
-					insertionCase5( X.leftChild );
+				
+				//Pour l'insertion de 69 on devrait passer ici
+				else if(X.parent.rightChild != null && X.grandParent().leftChild != null){
+					System.out.println("youhouuuuuu");
+					if((X.parent.rightChild.value.compareTo(X.value) == 0) && (X.grandParent().leftChild.value.compareTo(X.parent.value)) == 0){
+						rotateLeft(X.parent);
+						System.out.println("go ins5");
+						insertionCase5( X.leftChild );
+					}
 				}
-			}
-			else{
-				return;
 			}
 		}
 		
-		return;
+		if(!rotation)
+			insertionCase5(X);
 	}
 
 	private void insertionCase5( RBNode<T> X )
 	{
+		System.out.println("***********       INS5      ***************");
 		if(X.parent != null && X.uncle() != null && X.parent.isRed() && X.uncle().isBlack()){
 			if((X.parent.rightChild.value.compareTo(X.value) == 0) && (X.grandParent().rightChild.value.compareTo(X.parent.value)) == 0){
 				if(X.grandParent().isBlack()){
@@ -424,18 +434,13 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		RBNode<T> uncle()
 		{
 			
-			if(grandParent() != null ){
-//				System.out.println("Grand parent : " + grandParent());
-//				System.out.println("GrandParent.leftChild : " + grandParent().leftChild);
-//				System.out.println("GrandParent.rightChild : " +grandParent().rightChild);
-//				System.out.println("Resultat comparaison entre grandParent.leftChild et parent.value : " + grandParent().leftChild.value.compareTo(parent.value));
-//				System.out.println("Resultat comparaison entre grandParent.rightChild et parent.value : " + grandParent().rightChild.value.compareTo(parent.value));
-				if(grandParent().leftChild != null && (grandParent().leftChild.value.compareTo(parent.value) != 0)){
+			if(this.grandParent() != null ){
+				if(this.grandParent().leftChild.value != null && (this.grandParent().leftChild.value.compareTo(parent.value) != 0)){
 					return grandParent().leftChild;
 				}
 				
-				else if(grandParent().rightChild.value != null && (grandParent().rightChild.value.compareTo(parent.value) != 0)){
-					return grandParent().rightChild;
+				else if(this.grandParent().rightChild.value != null && (this.grandParent().rightChild.value.compareTo(parent.value) != 0)){
+					return this.grandParent().rightChild;
 				}
 				
 				else{
