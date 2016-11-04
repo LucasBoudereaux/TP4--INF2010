@@ -65,21 +65,19 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		return null;
 	}
 
-	/*public int getHauteur() {
+	public int getHauteur() {
 		// TODO Auto-generated method stub
 		return getHauteur(this.root);
 	}
 
 
 	private int getHauteur(RBNode<T> tree) {
-		if (tree == null) {
-			return 0;
-		}
-		
-		// À COMPLÉTER
-
+		if( tree == null)
+			return -1;
+		else
+			return 1 + Math.max( getHauteur( tree.leftChild ), getHauteur( tree.rightChild ) );
 	}
-	*/
+	
 
 	public void insert(T val)
 	{
@@ -286,16 +284,24 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		else
 		{
 			System.out.print( "PreOrdre ( ");
+			//System.out.println(root);
 			printTreePreOrder( root );
 			System.out.println( " )");
 		}
 		return;
 	}
 
-	private void printTreePreOrder( RBNode<T> P )
+	private void printTreePreOrder( RBNode<T> P ) //NGD
 	{
-		// A MODIFIER/COMPLÉTER
-		return; 
+		if(P == null){
+			//
+		}else{
+			if(P.value != null){
+				System.out.print("{" + P + "},");
+			}
+			printTreePreOrder(P.leftChild);
+			printTreePreOrder(P.rightChild);
+		}
 	}
 
 	public void printTreePostOrder()
@@ -311,9 +317,17 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		return;
 	}
 
-	private void printTreePostOrder( RBNode<T> P )
+	private void printTreePostOrder( RBNode<T> P ) //GDN
 	{
-		// A MODIFIER/COMPLÉTER
+		if(P == null){
+			//
+		}else{
+			printTreePostOrder(P.leftChild);
+			printTreePostOrder(P.rightChild);
+			if(P.value != null){
+				System.out.print("{" + P + "},");
+			}
+		}
 		return; 
 	}
 
@@ -331,9 +345,18 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		return;
 	}
 
-	private void printTreeAscendingOrder( RBNode<T> P )
+	private void printTreeAscendingOrder( RBNode<T> P )//GND
 	{
-		// A COMPLÉTER
+		if(P == null){
+			//
+		}else{
+			printTreeAscendingOrder(P.leftChild);
+			if(P.value != null){
+				System.out.print("{" + P + "},");
+			}
+			printTreeAscendingOrder(P.rightChild);
+		}
+		return;
 
 	}
 
@@ -353,7 +376,16 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void printTreeDescendingOrder( RBNode<T> P )
 	{
-		// A COMPLÉTER
+		if(P == null){
+			//
+		}else{
+			printTreeDescendingOrder(P.rightChild);
+			if(P.value != null){
+				System.out.print("{" + P + "},");
+			}
+			printTreeDescendingOrder(P.leftChild);
+		}
+		return;
 
 	}
 
@@ -368,8 +400,6 @@ public class RedBlackTree<T extends Comparable<? super T> >
 			Queue<RBNode<T>> q = new LinkedList<RBNode<T>>();
 
 			q.add(root);
-
-			//  À COMPLÉTER
 
 			System.out.println( " )");
 		}

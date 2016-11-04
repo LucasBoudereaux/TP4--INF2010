@@ -52,19 +52,19 @@ public class RedBlackTreeMain
 		System.out.println();
 
 //		// Affichage pre-ordre et post-ordre
-//		tree.printTreePreOrder();
-//		tree.printTreePostOrder();
-//		tree.printTreeAscendingOrder();
-//		tree.printTreeDescendingOrder();
+		tree.printTreePreOrder();
+		tree.printTreePostOrder();
+		tree.printTreeAscendingOrder();
+		tree.printTreeDescendingOrder();
 //
 //		// Affichage par niveaux
 //		tree.printTreeLevelOrder();
 //
 //
 //		// Comparer les hauteurs des 2 arbres
-//		System.out.println();
-//		System.out.println("Hauteur de l'arbre bianire est : " + t.getHauteur());
-//		System.out.println("Hauteur de l'arbre rouge-noir est : " + tree.getHauteur() + "\n");
+		System.out.println();
+		System.out.println("Hauteur de l'arbre bianire est : " + t.getHauteur());
+		System.out.println("Hauteur de l'arbre rouge-noir est : " + tree.getHauteur() + "\n");
 
 	}
 }
