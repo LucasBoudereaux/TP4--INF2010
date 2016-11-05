@@ -72,8 +72,8 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 
 	private int getHauteur(RBNode<T> tree) {
-		if( tree == null)
-			return -1;
+		if( tree.isNil())
+			return 0;
 		else
 			return 1 + Math.max( getHauteur( tree.leftChild ), getHauteur( tree.rightChild ) );
 	}
@@ -389,6 +389,7 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public void printTreeLevelOrder()
 	{
 		if(root == null)
@@ -400,6 +401,20 @@ public class RedBlackTree<T extends Comparable<? super T> >
 			Queue<RBNode<T>> q = new LinkedList<RBNode<T>>();
 
 			q.add(root);
+			
+			while (!q.isEmpty()) 
+	        {
+				RBNode tempNode = q.poll(); // poll() permet de retirer le noeud courant dans la liste et renvoie ce noeud
+	            System.out.print("{" + tempNode+ " },");
+	 
+	            if (tempNode.leftChild.value != null) { //On vérifie que l'on a pas un NIL pour pas l'afficher !
+	                q.add(tempNode.leftChild);
+	            }
+	 
+	            if (tempNode.rightChild.value != null) {
+	                q.add(tempNode.rightChild);
+	            }
+	        }
 
 			System.out.println( " )");
 		}

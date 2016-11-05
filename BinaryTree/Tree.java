@@ -34,7 +34,7 @@ public class Tree<AnyType> {
 
 	private int getHauteur(Node<AnyType> tree) {
 		if( tree == null)
-			return -1;
+			return 0;
 		else
 			return 1 + Math.max( getHauteur( tree.left ), getHauteur( tree.right ) );
 	}

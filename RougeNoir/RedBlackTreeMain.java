@@ -58,7 +58,7 @@ public class RedBlackTreeMain
 		tree.printTreeDescendingOrder();
 //
 //		// Affichage par niveaux
-//		tree.printTreeLevelOrder();
+		tree.printTreeLevelOrder();
 //
 //
 //		// Comparer les hauteurs des 2 arbres
