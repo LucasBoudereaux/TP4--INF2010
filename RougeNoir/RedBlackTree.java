@@ -254,7 +254,6 @@ public class RedBlackTree<T extends Comparable<? super T> >
 
 	private void rotateRight( RBNode<T> R )
 	{
-		System.out.println("rotate right");
 		RBNode<T> X = R.leftChild;
 		RBNode<T> P = R;
 		RBNode<T> temp;
@@ -285,7 +284,7 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		{
 			System.out.print( "PreOrdre ( ");
 			//System.out.println(root);
-			printTreePreOrder( root );
+			printTreePreOrder(root);
 			System.out.println( " )");
 		}
 		return;
@@ -296,8 +295,11 @@ public class RedBlackTree<T extends Comparable<? super T> >
 		if(P == null){
 			//
 		}else{
-			if(P.value != null){
-				System.out.print("{" + P + "},");
+			if(P.value != null ){
+				if(P.value == root.value)
+					System.out.print("{" + P + "}"); //Le premier noeud affiché ne doit pas avoir de virgule qui le précède
+				else
+					System.out.print(", {" + P + "}");
 			}
 			printTreePreOrder(P.leftChild);
 			printTreePreOrder(P.rightChild);
@@ -325,7 +327,10 @@ public class RedBlackTree<T extends Comparable<? super T> >
 			printTreePostOrder(P.leftChild);
 			printTreePostOrder(P.rightChild);
 			if(P.value != null){
-				System.out.print("{" + P + "},");
+				if (P.value == root.value)
+					System.out.print("{" + P + "} "); 
+				else
+					System.out.print("{" + P + "} ");
 			}
 		}
 		return; 
@@ -405,7 +410,11 @@ public class RedBlackTree<T extends Comparable<? super T> >
 			while (!q.isEmpty()) 
 	        {
 				RBNode tempNode = q.poll(); // poll() permet de retirer le noeud courant dans la liste et renvoie ce noeud
-	            System.out.print("{" + tempNode+ " },");
+				
+				if(tempNode.value == root.value)
+					System.out.print("{" + tempNode + "}");
+				else 
+					System.out.print(", {" + tempNode+ "}");
 	 
 	            if (tempNode.leftChild.value != null) { //On vérifie que l'on a pas un NIL pour pas l'afficher !
 	                q.add(tempNode.leftChild);

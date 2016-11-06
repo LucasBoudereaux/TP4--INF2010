@@ -51,7 +51,7 @@ public class Tree<AnyType> {
 			//
 		}else{
 			results += printPreOrder(root.left);
-			results += ", (" + root.val + ")" ;
+			results += "(" + root.val + "), " ;
 			results += printPreOrder(root.right);
 		}
 		return results;
