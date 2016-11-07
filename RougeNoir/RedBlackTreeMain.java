@@ -18,7 +18,7 @@ public class RedBlackTreeMain
 		}
 
 		// Afficher l'arbre binaire
-		System.out.println("PreOrdre Arbre de recherche binaire :( " + t.printTreePreOrder()+ "\n");
+		System.out.println("PreOrdre Arbre de recherche binaire : " + t.printTreePreOrder()+ "\n");
 
 		// Creation de l'arbre
 		RedBlackTree<Integer> tree = new RedBlackTree<Integer>();
